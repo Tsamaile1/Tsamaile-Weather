@@ -9,13 +9,13 @@
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background-color: hsl(240, 29%, 97%);
+      background-image: url(https://cdn.contrastly.com/wp-content/uploads/bad-weather-1.jpg) ;
     }
     .content {
-      margin-left: 200px;
-      margin-right: 450px;
-      margin-bottom: 100px;
-      top: 80px;
+      margin: auto;
+      width:700px;
       background-color: white;
+      opacity: 0.7;
       padding: 20px;
       box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
     }
@@ -137,23 +137,26 @@
               Humidity: <strong><span>87%</span></strong
               >, Wind: <strong><span>7.2km/h</span></strong>`;
 
+
+
+
+
 function displayTemperature(response) {
   console.log.response
   let temperatureElement=document.querySelector("#temp-unit");
-  let temperature=Math.round(response.data.temperature.current);
+  let temperature=response.data.temperature.current;
 
   let cityElement=document.querySelector("#current-location");
   cityElement.innerHTML= response.data.city
   temperatureElement.innerHTML = temperature;
 }
-function search(event) {
+  function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${searchInput.value}`;
-  
   let apiKey="bacodabffe100ecf22f2d099t74223bc";
-  let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=bacodabffe100ecf22f2d099t74223bc&units=metric`;
+  let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${cityElement}&key=bacodabffe100ecf22f2d099t74223bc&units=metric`;
   
   axios.get(apiUrl).then(displayTemperature)
 }
